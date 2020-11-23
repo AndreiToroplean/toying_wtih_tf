@@ -1,24 +1,28 @@
 import numpy as np
+import tensorflow as tf
 
 
 def f(x):
     return 1 / x
 
 
-np.random.seed(0)
+def gen_x_y(func=f, n_points=1000, bounds=(-10, 10), seed=0):
+    np.random.seed(seed)
 
-bounds = (-10, 10)
-n_points = 1000
+    x = np.random.uniform(*bounds, n_points)
+    y = func(x)
+    return x, y
 
-x = np.random.uniform(*bounds, n_points)
-y = f(x)
-print(x, y, sep="\n")
+
+x, y = gen_x_y()
+dataset = tf.data.Dataset.from_tensor_slices((x, y))
 
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
+    plt.figure()
     plt.plot(x, y, ".")
-    plt.xlim(*bounds)
+    plt.xlim(-10, 10)
     plt.ylim(-10, 10)
     plt.show()
