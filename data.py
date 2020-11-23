@@ -15,7 +15,6 @@ def gen_x_y(func=f, n_points=1000, bounds=(-10, 10), seed=0):
 
 
 x, y = gen_x_y()
-dataset = tf.data.Dataset.from_tensor_slices((x, y))
 
 
 if __name__ == "__main__":
